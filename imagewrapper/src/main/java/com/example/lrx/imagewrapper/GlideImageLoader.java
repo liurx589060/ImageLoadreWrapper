@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 
@@ -80,12 +81,12 @@ public class GlideImageLoader extends AbsImageLoader {
         }
 
         if(drawableTypeRequest != null) {
-            drawableTypeRequest.into(new SimpleTarget<GlideBitmapDrawable>() {
+            drawableTypeRequest.into(new SimpleTarget() {
                 @Override
-                public void onResourceReady(GlideBitmapDrawable resource, GlideAnimation<? super GlideBitmapDrawable> glideAnimation) {
-                    if(resource == null)
-                        return;
-                    Bitmap bitmap = resource.getBitmap();
+                public void onResourceReady(Object resource, GlideAnimation glideAnimation) {
+                    if(resource == null)  {return;}
+                    if (!(resource instanceof GlideBitmapDrawable))  {return;}
+                    Bitmap bitmap = ((GlideBitmapDrawable)resource).getBitmap();
 
                     if (listener != null) {
                         listener.imageLoaded(bitmap,params.url);
