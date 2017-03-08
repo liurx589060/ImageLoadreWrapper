@@ -47,7 +47,7 @@ public class ImageParams<T> {
 
     public void setImageView(ImageView img) {
         this.imageView = img;
-        if(imageLoader != null) {
+        if(imageLoader != null && this.imageView != null) {
             imageLoader.setImage(this);
         }
     }
@@ -72,5 +72,18 @@ public class ImageParams<T> {
     public ImageParams setResFile(File resFile) {
         this.resFile = resFile;
         return this;
+    }
+
+    public void downImage(ImageLoadedListener listener) {
+        if(imageLoader != null) {
+            imageLoader.downImage(this,listener);
+        }
+    }
+
+    public void downImage(String url,ImageLoadedListener listener) {
+        if(imageLoader != null) {
+            this.setUrl(url);
+            imageLoader.downImage(this,listener);
+        }
     }
 }

@@ -1,13 +1,16 @@
 package com.example.lrx.imageloadrewrapper;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.lrx.imagewrapper.AbsImageLoader;
 import com.example.lrx.imagewrapper.GlideImageLoader;
+import com.example.lrx.imagewrapper.ImageLoadedListener;
 import com.example.lrx.imagewrapper.ImageParams;
 import com.example.lrx.imagewrapper.ImageWrapper;
 
@@ -16,6 +19,9 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class MainActivity extends AppCompatActivity {
 
     String url = "http://img4.duitang.com/uploads/item/201307/18/20130718171017_CdByt.jpeg";
+
+    String gifUrl = "http://static2.photo.sina.com.cn/bmiddle/4f0d32e4g57ca130148d1";
+
     private ImageView mImageView;
     private ImageView mImageView2;
 
@@ -46,9 +52,19 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+//        ImageWrapper.getInstance().with(this)
+//                //.setUrl("http://img1.gtimg.com/sports/pics/hv1/195/203/689/44854185.jpg")
+//                .setUrl(gifUrl)
+//                .setImageView(mImageView);
+
         ImageWrapper.getInstance().with(this)
-                .setUrl("http://img1.gtimg.com/sports/pics/hv1/195/203/689/44854185.jpg")
-                .setImageView(mImageView);
+                .downImage(url, new ImageLoadedListener() {
+                    @Override
+                    public void imageLoaded(Bitmap bitmap, String url) {
+                        Log.e("yy",url);
+                        mImageView.setImageBitmap(bitmap);
+                    }
+                });
 
         ImageWrapper.getInstance().with(this)
                 .setImageView(mImageView2, new AbsImageLoader() {
@@ -57,12 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         Glide.with((Activity) params.mContext)
                         .load(url).bitmapTransform(new CropCircleTransformation((Activity)params.mContext))
                         .crossFade(3000)
-                        .into(mImageView2);
-                    }
-
-                    @Override
-                    public void downImage() {
-
+                        .into(params.imageView);
                     }
                 });
     }
