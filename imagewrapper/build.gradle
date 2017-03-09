@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion 25
@@ -17,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 repositories {
@@ -32,4 +37,14 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     // If you want to use the GPU Filters
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
+}
+
+//添加
+publish {
+    userOrg = 'wys30201'//bintray.com用户名
+    groupId = 'com.lrx'//jcenter上的路径
+    artifactId = 'imagewrapper'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'wrapper the third image libraray and can custom the other libraray'//描述，不重要
+    website = 'https://github.com/liurx589060/HttpWrapper'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
