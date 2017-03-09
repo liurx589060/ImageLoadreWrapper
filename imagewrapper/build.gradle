@@ -24,6 +24,15 @@ android {
     }
 }
 
+task makeJar(type: Copy) {
+    delete 'build/libs/imagewrapper.jar'
+    from('build/intermediates/bundles/release/')
+    into('build/libs/')
+    include('classes.jar')
+    rename ('classes.jar', 'imagewrapper.jar')
+}
+makeJar.dependsOn(build)
+
 repositories {
     jcenter()
     mavenCentral()  // GPUImage for Android
