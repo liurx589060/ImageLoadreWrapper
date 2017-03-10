@@ -39,21 +39,21 @@ public class MainActivity extends AppCompatActivity {
         mImageView2 = (ImageView) findViewById(R.id.imageView2);
 
         //Universal Image Loader
-        ImageWrapper.init(new UniversalImageLoader(this));
-        ImageWrapper.getInstance().with(this)
-                //.setUrl("http://img1.gtimg.com/sports/pics/hv1/195/203/689/44854185.jpg")
-                //.setUrl(gifUrl)
-                .setUrl(url)
-                .setImageView(mImageView);
-
-        ImageWrapper.getInstance().with(this)
-                .setImageView(mImageView2, new AbsImageLoader() {
-                    @Override
-                    public void setImage(ImageParams params) {
-                        ImageLoader.getInstance().displayImage(url2,params.imageView,new DisplayImageOptions.Builder().displayer(
-                                new RoundedBitmapDisplayer(30)).build());
-                    }
-                });
+//        ImageWrapper.init(new UniversalImageLoader(this));
+//        ImageWrapper.getInstance().with(this)
+//                //.setUrl("http://img1.gtimg.com/sports/pics/hv1/195/203/689/44854185.jpg")
+//                //.setUrl(gifUrl)
+//                .setUrl(url)
+//                .setImageView(mImageView);
+//
+//        ImageWrapper.getInstance().with(this)
+//                .setImageView(mImageView2, new AbsImageLoader() {
+//                    @Override
+//                    public void setImage(ImageParams params) {
+//                        ImageLoader.getInstance().displayImage(url2,params.imageView,new DisplayImageOptions.Builder().displayer(
+//                                new RoundedBitmapDisplayer(30)).build());
+//                    }
+//                });
 
 //        ImageWrapper.getInstance().with(this)
 //                .downImage(url2, new ImageLoadedListener() {
@@ -66,30 +66,30 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        //Glide
-//        ImageWrapper.init(new GlideImageLoader());
-//        ImageWrapper.getInstance().with(this)
-//                .setUrl(url)
-//                .setImageView(mImageView);
-//
-//        ImageWrapper.getInstance().with(this)
-//                .setImageView(mImageView2, new AbsImageLoader() {
-//                    @Override
-//                    public void setImage(ImageParams params) {
-//                        Glide.with((Activity) params.mContext)
-//                        .load(url2).bitmapTransform(new CropCircleTransformation((Activity)params.mContext))
-//                        .crossFade(3000)
-//                        .into(params.imageView);
-//                    }
-//                });
+        //Glide
+        ImageWrapper.init(new GlideImageLoader());
+        ImageWrapper.getInstance().with(this)
+                .setUrl(url)
+                .setImageView(mImageView);
 
-//        ImageWrapper.getInstance().with(this)
-//                .downImage(url, new ImageLoadedListener() {
-//                    @Override
-//                    public void imageLoaded(Bitmap bitmap, String url) {
-//                        Log.e("yy",url);
-//                        mImageView.setImageBitmap(bitmap);
-//                    }
-//                });
+        ImageWrapper.getInstance().with(this)
+                .setImageView(mImageView2, new AbsImageLoader() {
+                    @Override
+                    public void setImage(ImageParams params) {
+                        Glide.with((Activity) params.mContext)
+                        .load(url2).bitmapTransform(new CropCircleTransformation((Activity)params.mContext))
+                        .crossFade(3000)
+                        .into(params.imageView);
+                    }
+                });
+
+        ImageWrapper.getInstance().with(this)
+                .downImage(url, new ImageLoadedListener() {
+                    @Override
+                    public void imageLoaded(Bitmap bitmap, String url) {
+                        Log.e("yy",url);
+                        mImageView.setImageBitmap(bitmap);
+                    }
+                });
     }
 }
