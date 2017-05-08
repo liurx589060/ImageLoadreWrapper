@@ -9,13 +9,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.lrx.imagewrapper.AbsImageLoader;
-import com.example.lrx.imagewrapper.GlideImageLoader;
+import com.example.lrx.imagewrapper.DefaultImageLoader;
 import com.example.lrx.imagewrapper.ImageLoadedListener;
 import com.example.lrx.imagewrapper.ImageParams;
 import com.example.lrx.imagewrapper.ImageWrapper;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Glide
-        ImageWrapper.init(new GlideImageLoader());
+        ImageWrapper.init(new DefaultImageLoader());
         ImageWrapper.getInstance().with(this)
                 .setUrl(url)
                 .setImageView(mImageView);
